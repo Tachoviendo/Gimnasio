@@ -1,6 +1,7 @@
 
 package ConMySql;
 
+import com.mysql.jdbc.PreparedStatement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -26,6 +27,10 @@ public class Connection {
     public void cerrarBD() throws SQLException{
         if(!con.isClosed())
             con.close();
+    }
+
+    public PreparedStatement prepareCall(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

@@ -62,16 +62,26 @@ public class frmInicio extends javax.swing.JFrame {
         jButton_iniSesion.setBackground(new java.awt.Color(255, 0, 0));
         jButton_iniSesion.setFont(new java.awt.Font("Syntax LT Std Black", 0, 18)); // NOI18N
         jButton_iniSesion.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_iniSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmInicio_Inisesion.png"))); // NOI18N
         jButton_iniSesion.setText("Iniciar Sesión");
         jButton_iniSesion.setAlignmentY(0.0F);
         jButton_iniSesion.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true));
         jButton_iniSesion.setBorderPainted(false);
+        jButton_iniSesion.setContentAreaFilled(false);
         jButton_iniSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_iniSesion.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         jButton_iniSesion.setDefaultCapable(false);
+        jButton_iniSesion.setDisplayedMnemonicIndex(0);
+        jButton_iniSesion.setFocusable(false);
+        jButton_iniSesion.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jButton_iniSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton_iniSesion.setIconTextGap(0);
         jButton_iniSesion.setMargin(new java.awt.Insets(5, 14, 3, 14));
         jButton_iniSesion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton_iniSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton_iniSesionMouseEntered(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButton_iniSesionMouseExited(evt);
             }
@@ -117,24 +127,27 @@ public class frmInicio extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton_register)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_iniSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPasswordField_ini)
-                            .addComponent(jTextField_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextField_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(167, 167, 167)
+                        .addComponent(jButton_iniSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(jButton_register)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,11 +161,11 @@ public class frmInicio extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPasswordField_ini, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_iniSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_register, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(42, 42, 42))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(jButton_register)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton_iniSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,28 +182,10 @@ public class frmInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_iniSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_iniSesionActionPerformed
-        String pass = new String(jPasswordField_ini.getPassword());
-        if (existeusuario(jTextField_usuario.getText(), pass)){
-                JOptionPane.showMessageDialog(null, "Bienvenido al Sistema");
-                new frmMain().setVisible(true);
-                this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(null, "Nombre de usuario y/o contraseña incorrecta");
-                jTextField_usuario.setText("");
-                jPasswordField_ini.setText("");
-                
-            }
-    }//GEN-LAST:event_jButton_iniSesionActionPerformed
-
     private void jButton_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_registerActionPerformed
         new frmRegister().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton_registerActionPerformed
-
-    private void jButton_iniSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_iniSesionMouseExited
-        
-    }//GEN-LAST:event_jButton_iniSesionMouseExited
 
     private void jButton_registerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_registerMouseExited
         jButton_register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmInicio_registrarse.png")));
@@ -200,7 +195,29 @@ public class frmInicio extends javax.swing.JFrame {
         jButton_register.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmInicio_registrarse2.png")));
     }//GEN-LAST:event_jButton_registerMouseEntered
 
-    /**
+    private void jButton_iniSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_iniSesionActionPerformed
+        String pass = new String(jPasswordField_ini.getPassword());
+        if (existeusuario(jTextField_usuario.getText(), pass)){
+            JOptionPane.showMessageDialog(null, "Bienvenido al Sistema");
+            new frmMain().setVisible(true);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Nombre de usuario y/o contraseña incorrecta");
+            jTextField_usuario.setText("");
+            jPasswordField_ini.setText("");
+
+        }
+    }//GEN-LAST:event_jButton_iniSesionActionPerformed
+
+    private void jButton_iniSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_iniSesionMouseExited
+        jButton_iniSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmInicio_Inisesion.png")));
+    }//GEN-LAST:event_jButton_iniSesionMouseExited
+
+    private void jButton_iniSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_iniSesionMouseEntered
+        jButton_iniSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmInicio_Inisesion2.png")));
+    }//GEN-LAST:event_jButton_iniSesionMouseEntered
+
+    /*
      * @param args the command line arguments
      */
     public static void main(String args[]) {
