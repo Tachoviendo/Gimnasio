@@ -59,7 +59,9 @@ public class frmClientes extends javax.swing.JFrame {
             df = new SimpleDateFormat("yyyy-MM-d");
             fech = df.format(Date);
             return fech;
-        }
+    }
+    
+    
     
     private void Allow(){
         jTextField_Cedula.setEditable(true);
@@ -198,6 +200,7 @@ public class frmClientes extends javax.swing.JFrame {
         jButton_addCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_add.png"))); // NOI18N
         jButton_addCliente.setBorderPainted(false);
         jButton_addCliente.setContentAreaFilled(false);
+        jButton_addCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_addCliente.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jButton_addCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -216,6 +219,7 @@ public class frmClientes extends javax.swing.JFrame {
         jButton_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_guardar.png"))); // NOI18N
         jButton_save.setBorderPainted(false);
         jButton_save.setContentAreaFilled(false);
+        jButton_save.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_save.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jButton_save.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -251,6 +255,7 @@ public class frmClientes extends javax.swing.JFrame {
         jButton_del.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_delete.png"))); // NOI18N
         jButton_del.setBorderPainted(false);
         jButton_del.setContentAreaFilled(false);
+        jButton_del.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_del.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jButton_del.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -266,6 +271,12 @@ public class frmClientes extends javax.swing.JFrame {
             }
         });
 
+        jTextField_Altura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_AlturaActionPerformed(evt);
+            }
+        });
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmClientes_nombre.png"))); // NOI18N
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmClientes_titulo.png"))); // NOI18N
@@ -276,6 +287,7 @@ public class frmClientes extends javax.swing.JFrame {
         jButton_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_back.png"))); // NOI18N
         jButton_back.setBorderPainted(false);
         jButton_back.setContentAreaFilled(false);
+        jButton_back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_back.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jButton_back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -435,41 +447,109 @@ public class frmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_delActionPerformed
 
     private void jButton_modActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modActionPerformed
-        try {
-            int fila;
-            String sql;
-
-            if (JOptionPane.showConfirmDialog(rootPane, "¿Desea actualizar los datos del registro?",
-                "Registro actualizado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-            fila =jTable_Clientes.getSelectedRow();
-            String fecha = convertTostring(jTextField_fdn.getDate());
-            sql="UPDATE `cliente` SET `id`='"+jTable_Clientes.getValueAt(fila, 0)+"',`nombre`='"+jTextField_name.getText()+"',`cedula`='"+jTextField_Cedula.getText()+
-            "',`telefono`='"+jTextField_Telefono.getText()+
-            "',`fdn`='"+fecha+"',`peso`='"+jTextField_Peso.getText()+
-            "',`altura`='"+jTextField_Altura.getText()+
-            "'WHERE "+jTable_Clientes.getValueAt(fila, 0)+"";
-            PreparedStatement ps = conection.prepareCall(sql);
-            int n= ps.executeUpdate();
-            if(n>0){
-                CargarCliente();
-                JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
+        int aux =0;
+        String date = String.valueOf(jTextField_fdn.getDate());
+        System.out.println(date.length());
+        String datos[] = {jTextField_name.getText(), jTextField_Cedula.getText(), jTextField_Telefono.getText(),  jTextField_Peso.getText(), jTextField_Altura.getText()};
+        String names[] = {"Nombre", "Cédula", " Teléfono", "Peso", "Altura"};
+        String sentencia = "Los siguientes campos se encuentran vacíos: ";
+        
+        for (int i=0; i<5; i++){
+           if (datos[i].length() ==0){
+                if (aux==0){
+                    sentencia += names[i];
+                    aux++;
+                }
+                else{
+                    sentencia += (", "+names[i]);
+                    aux++;
+                }
+                
             }
         }
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, "ERROR  "+e.getMessage());
+        if(date.length() == 4){
+            sentencia +=(", Fecha de nacimiento");
         }
+        
+        if (aux>0 ){
+            JOptionPane.showMessageDialog(null, (sentencia+"."));
+        }
+        else{
+            try {
+                int fila;
+                String sql;
+
+                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea actualizar los datos del registro?",
+                "Registro actualizado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                    fila =jTable_Clientes.getSelectedRow();
+                    String fecha = convertTostring(jTextField_fdn.getDate());
+                    sql="UPDATE `cliente` SET `id`='"+jTable_Clientes.getValueAt(fila, 0)+"',`nombre`='"+jTextField_name.getText()+"',`cedula`='"+jTextField_Cedula.getText()+
+                    "',`telefono`='"+jTextField_Telefono.getText()+
+                    "',`fdn`='"+fecha+"',`peso`='"+jTextField_Peso.getText()+
+                    "',`altura`='"+jTextField_Altura.getText()+
+                    "'WHERE "+jTable_Clientes.getValueAt(fila, 0)+"";
+                    PreparedStatement ps = conection.prepareCall(sql);
+                    int n= ps.executeUpdate();
+                    if(n>0){
+                        CargarCliente();
+                        JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
+                    }
+                }
+            } 
+            catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, "ERROR  "+e.getMessage());
+            }
+            
+        }
+        
+        
     }//GEN-LAST:event_jButton_modActionPerformed
 
     private void jButton_modMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_modMouseExited
-        jButton_mod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_mod.png")));
+        if(jButton_mod.isEnabled()){
+            jButton_mod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_mod.png")));
+        }
+        
     }//GEN-LAST:event_jButton_modMouseExited
 
     private void jButton_modMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_modMouseEntered
-        jButton_mod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_mod2.png")));
+        if(jButton_mod.isEnabled()){
+            jButton_mod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_mod2.png")));
+        }
+        
+        
     }//GEN-LAST:event_jButton_modMouseEntered
 
     private void jButton_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
-        try {
+        int aux =0;
+        String date = String.valueOf(jTextField_fdn.getDate());
+        System.out.println(date.length());
+        String datos[] = {jTextField_name.getText(), jTextField_Cedula.getText(), jTextField_Telefono.getText(),  jTextField_Peso.getText(), jTextField_Altura.getText()};
+        String names[] = {"Nombre", "Cédula", " Teléfono", "Peso", "Altura"};
+        String sentencia = "Los siguientes campos se encuentran vacíos: ";
+        
+        for (int i=0; i<5; i++){
+           if (datos[i].length() ==0){
+                if (aux==0){
+                    sentencia += names[i];
+                    aux++;
+                }
+                else{
+                    sentencia += (", "+names[i]);
+                    aux++;
+                }
+                
+            }
+        }
+        if(date.length() == 4){
+            sentencia +=(", Fecha de nacimiento");
+        }
+        
+        if (aux>0 ){
+            JOptionPane.showMessageDialog(null, (sentencia+"."));
+        }
+        else{
+            try {
             String sql = "INSERT INTO `cliente` (`id`,`nombre`, `cedula`, `telefono`, `fdn`, `peso`,`altura`) VALUES (null,?,?,?,?,?,?)";
             PreparedStatement ps =conection.prepareCall(sql);
 
@@ -485,11 +565,17 @@ public class frmClientes extends javax.swing.JFrame {
             if(n>0){
                 JOptionPane.showMessageDialog(null, "Datos guardados correctamente");
             }
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, "Error al guardar, verifique "+e.getMessage());
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, "Error al guardar, verifique "+e.getMessage());
+            }
+            CargarCliente();
+            Clean();
+            
         }
-        CargarCliente();
-        Clean();
+            
+        
+        
+        
     }//GEN-LAST:event_jButton_saveActionPerformed
 
     private void jButton_saveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_saveMouseExited
@@ -571,6 +657,10 @@ public class frmClientes extends javax.swing.JFrame {
         new frmMain().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton_backActionPerformed
+
+    private void jTextField_AlturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_AlturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_AlturaActionPerformed
       
     /**
      * @param args the command line arguments

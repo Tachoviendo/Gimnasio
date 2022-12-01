@@ -81,6 +81,7 @@ public class frmRegister extends javax.swing.JFrame {
 
         jButton_AddAcc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmRegister_Crear.png"))); // NOI18N
         jButton_AddAcc.setContentAreaFilled(false);
+        jButton_AddAcc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_AddAcc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton_AddAccMouseEntered(evt);
@@ -105,6 +106,7 @@ public class frmRegister extends javax.swing.JFrame {
 
         jButton_AddAcc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmRegister_volver.png"))); // NOI18N
         jButton_AddAcc1.setContentAreaFilled(false);
+        jButton_AddAcc1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_AddAcc1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton_AddAcc1MouseEntered(evt);
@@ -187,7 +189,28 @@ public class frmRegister extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_AddAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddAccActionPerformed
-        crearUsuario();
+        
+        //comprueba cuantos campos fueron rellenados por el usuario.
+        int aux=0;
+        String datos[] = {jTextField_addUsuario1.getText(), jTextField_addMail.getText(), String.valueOf(jPasswordField1.getPassword())};
+        String names[] = {"Nombre de Usuario", "Correo Electrónico", "Contraseña"};
+        String sentencia = "Los siguientes campos se encuentran vacíos: ";
+        
+        for (int i=0; i<3; i++){
+            if (datos[i].length() ==0){
+                if (aux==0){
+                    sentencia += names[i];
+                    aux++;
+                }
+                else{
+                    sentencia += (", "+names[i]);
+                    aux++;
+                }
+            }
+        }
+        if (sentencia.length()>0 ){
+            JOptionPane.showMessageDialog(null, (sentencia+"."));
+        }   
     }//GEN-LAST:event_jButton_AddAccActionPerformed
 
     private void jButton_AddAccMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_AddAccMouseExited

@@ -102,6 +102,7 @@ public class frmInicio extends javax.swing.JFrame {
         jButton_register.setBorder(null);
         jButton_register.setBorderPainted(false);
         jButton_register.setContentAreaFilled(false);
+        jButton_register.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_register.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton_registerMouseEntered(evt);
@@ -197,14 +198,44 @@ public class frmInicio extends javax.swing.JFrame {
 
     private void jButton_iniSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_iniSesionActionPerformed
         String pass = new String(jPasswordField_ini.getPassword());
+        
+        
+        
+        
+        
+        
         if (existeusuario(jTextField_usuario.getText(), pass)){
-            JOptionPane.showMessageDialog(null, "Bienvenido al Sistema");
+            JOptionPane.showMessageDialog(null, "¡Inicio de sesión exitoso!.");
             new frmMain().setVisible(true);
             this.dispose();
         }else{
-            JOptionPane.showMessageDialog(null, "Nombre de usuario y/o contraseña incorrecta");
-            jTextField_usuario.setText("");
-            jPasswordField_ini.setText("");
+            int aux =0;
+            String datos[] = {jTextField_usuario.getText(),  String.valueOf(jPasswordField_ini.getPassword())};
+            String names[] = {"Nombre de Usuario", "Contraseña"};
+            String sentencia = "Los siguientes campos se encuentran vacíos: ";
+        
+            for (int i=0; i<2; i++){
+                if (datos[i].length() ==0){
+                    if (aux==0){
+                        sentencia += names[i];
+                        aux++;
+                    }
+                    else{
+                        sentencia += (", "+names[i]);
+                        aux++;
+                    }
+                }
+            }
+            if (aux>0 ){
+            JOptionPane.showMessageDialog(null, (sentencia+"."));
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Nombre de usuario y/o contraseña incorrecta.");
+                jTextField_usuario.setText("");
+                jPasswordField_ini.setText("");
+            }
+            
+            
 
         }
     }//GEN-LAST:event_jButton_iniSesionActionPerformed

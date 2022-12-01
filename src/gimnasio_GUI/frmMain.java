@@ -43,6 +43,7 @@ public class frmMain extends javax.swing.JFrame {
         jButton_addCliente.setText("Agregar Cliente");
         jButton_addCliente.setBorderPainted(false);
         jButton_addCliente.setContentAreaFilled(false);
+        jButton_addCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_addCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton_addClienteMouseEntered(evt);
@@ -59,6 +60,7 @@ public class frmMain extends javax.swing.JFrame {
 
         jButton_close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmMain_cerrar.png"))); // NOI18N
         jButton_close.setContentAreaFilled(false);
+        jButton_close.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_close.setDefaultCapable(false);
         jButton_close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -77,6 +79,7 @@ public class frmMain extends javax.swing.JFrame {
         jButton_addProfesore1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frmMain_profesor.png"))); // NOI18N
         jButton_addProfesore1.setBorderPainted(false);
         jButton_addProfesore1.setContentAreaFilled(false);
+        jButton_addProfesore1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_addProfesore1.setDefaultCapable(false);
         jButton_addProfesore1.setFocusPainted(false);
         jButton_addProfesore1.addMouseListener(new java.awt.event.MouseAdapter() {

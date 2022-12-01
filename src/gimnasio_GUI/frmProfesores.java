@@ -208,6 +208,7 @@ public class frmProfesores extends javax.swing.JFrame {
         jButton_addProfesor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_add.png"))); // NOI18N
         jButton_addProfesor.setBorderPainted(false);
         jButton_addProfesor.setContentAreaFilled(false);
+        jButton_addProfesor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_addProfesor.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jButton_addProfesor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -225,6 +226,7 @@ public class frmProfesores extends javax.swing.JFrame {
 
         jButton_mod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_mod.png"))); // NOI18N
         jButton_mod.setContentAreaFilled(false);
+        jButton_mod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_mod.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jButton_mod.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -243,6 +245,7 @@ public class frmProfesores extends javax.swing.JFrame {
         jButton_del.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_delete.png"))); // NOI18N
         jButton_del.setBorderPainted(false);
         jButton_del.setContentAreaFilled(false);
+        jButton_del.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_del.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jButton_del.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -261,6 +264,7 @@ public class frmProfesores extends javax.swing.JFrame {
         jButton_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_guardar.png"))); // NOI18N
         jButton_save.setBorderPainted(false);
         jButton_save.setContentAreaFilled(false);
+        jButton_save.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_save.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jButton_save.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -286,6 +290,7 @@ public class frmProfesores extends javax.swing.JFrame {
         jButton_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/frm_back.png"))); // NOI18N
         jButton_back.setBorderPainted(false);
         jButton_back.setContentAreaFilled(false);
+        jButton_back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_back.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jButton_back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -456,18 +461,38 @@ public class frmProfesores extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_modMouseExited
 
     private void jButton_modActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modActionPerformed
-        espe = String.valueOf(jComboBox1.getSelectedItem());
-        System.out.println(espe);
-            if (espe =="Seleccionar especialidad"){
-                JOptionPane.showMessageDialog(null, "Seleccione una especialidad");
+        int aux =0;
+        String datos[] = {jTextField_name.getText(), jTextField_Cedula.getText(), jTextField_Telefono.getText()};
+        String names[] = {"Nombre", "Cédula", " Teléfono"};
+        String sentencia = "Los siguientes campos se encuentran vacíos: ";
+        
+        for (int i=0; i<3; i++){
+           if (datos[i].length() ==0){
+                if (aux==0){
+                    sentencia += names[i];
+                    aux++;
+                }
+                else{
+                    sentencia += (", "+names[i]);
+                    aux++;
+                }
+                
             }
-            else{
-                try {
-                    int fila;
-                    String sql;
+        }
+        espe = String.valueOf(jComboBox1.getSelectedItem());
+        if (aux>0 && espe =="Seleccionar especialidad" ){
+            JOptionPane.showMessageDialog(null, (sentencia+",  Especialidad."));
+        }
+        else if (aux >0){
+                JOptionPane.showMessageDialog(null, sentencia+".");
+        }
+        else{
+            try {
+                int fila;
+                String sql;
 
-                    if (JOptionPane.showConfirmDialog(rootPane, "¿Desea actualizar los datos del registro?",
-                    "Registro actualizado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                if (JOptionPane.showConfirmDialog(rootPane, "¿Desea actualizar los datos del registro?",
+                "Registro actualizado", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                     fila =jtProfesores.getSelectedRow();
             
                     sql="UPDATE `profesor` SET `id`='"+jtProfesores.getValueAt(fila, 0)+"',`cedula`='"+jTextField_Cedula.getText()+"',`telefono`='"+jTextField_Telefono.getText()+
@@ -480,8 +505,9 @@ public class frmProfesores extends javax.swing.JFrame {
                         CargarProfesor();
                         JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
                     }
-                    }
-            } catch (SQLException | HeadlessException e) {
+                }
+            } 
+            catch (SQLException | HeadlessException e) {
             JOptionPane.showMessageDialog(null, "ERROR  "+e.getMessage());
             }
                 
@@ -527,10 +553,30 @@ public class frmProfesores extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_saveMouseExited
 
     private void jButton_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveActionPerformed
-        espe = String.valueOf(jComboBox1.getSelectedItem());
+        int aux =0;
+        String datos[] = {jTextField_name.getText(), jTextField_Cedula.getText(), jTextField_Telefono.getText()};
+        String names[] = {"Nombre", "Cédula", " Teléfono"};
+        String sentencia = "Los siguientes campos se encuentran vacíos: ";
         
-        if (espe =="Seleccionar especialidad"){
-                JOptionPane.showMessageDialog(null, "Seleccione una especialidad");
+        for (int i=0; i<3; i++){
+           if (datos[i].length() ==0){
+                if (aux==0){
+                    sentencia += names[i];
+                    aux++;
+                }
+                else{
+                    sentencia += (", "+names[i]);
+                    aux++;
+                }
+                
+            }
+        }
+        espe = String.valueOf(jComboBox1.getSelectedItem());
+        if (aux>0 && espe =="Seleccionar especialidad" ){
+            JOptionPane.showMessageDialog(null, (sentencia+",  Especialidad."));
+        }
+        else if (aux >0){
+                JOptionPane.showMessageDialog(null, sentencia+".");
         }
         else{
             try {
